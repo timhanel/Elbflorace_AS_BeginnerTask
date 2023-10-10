@@ -1,7 +1,7 @@
 # Elbflorace_AS_BeginnerTask
  Einführungsaufgabe zu ROS2
  
-1. "type" install/setup.bash
+1. "type" . install/setup.bash
 2.  navigate to "your_ros2 workspace"/src
 3. "type" git clone "https://github.com/timhanel/Elbflorace_AS_BeginnerTask.git"
 4. "type" cd ..
