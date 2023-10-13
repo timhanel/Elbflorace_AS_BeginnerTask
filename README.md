@@ -3,15 +3,13 @@
  
  0. Install ROS2(iron) https://docs.ros.org/en/iron/Installation.html and 
 	colcon https://docs.ros.org/en/iron/Tutorials/Beginner-Client-Libraries/Colcon-Tutorial.html?highlight=colcon
-1. "type" . install/setup.bash
-2.  navigate to "your_ros2 workspace"/src
+1.  navigate to "your_ros2 workspace"/src
+2. "type" . install/setup.bash
 3. "type" git clone "https://github.com/timhanel/Elbflorace_AS_BeginnerTask.git"
-4. "type" cd ..
-4. "type" colcon build
-5. "type" source "your_workspace_dir"/install/local_setup.bash
-6. "type" ros2 launch ros2package launch.py
-7. open a new Terminal 
-8. "type" ros2 run turtlesim turtle_teleop_key
+4. "type" cd .. 
+5. "type" colcon build
+6. "type" source "your_workspace_dir"/install/local_setup.bash
+7. "type" ros2 launch ros2package launch.py
 
 package dependencies listed in ros2packe/package.xml
 

@@ -20,11 +20,13 @@
 #include "rclcpp/rclcpp.hpp"
 #include "std_msgs/msg/string.hpp"
 #include "rcl_interfaces/srv/set_parameters.hpp"
+#define DEFAULT 0xFFFFFF
 #define RED 0xFF0000
 #define GREEN 0x00FF00
 #define ORANGE 0xFFA500
 #define BLUE 0x0000FF
 using namespace std::chrono_literals;
+int currentcolor=BLUE;//since the startScreen is Blue
 void set_param(rcl_interfaces::msg::Parameter &p,int val,std::string name){
   p.name = name;
   p.value.type = 2; 
@@ -76,6 +78,7 @@ using std::placeholders::_1;
 class CanvasColorChange : public rclcpp::Node
 {
 public:
+
   CanvasColorChange ()
   : Node("canvasColorChange")
   {
@@ -89,20 +92,33 @@ private:
 
   void topic_callback(const turtlesim::msg::Pose & msg) const
   {
+    int requestedColor=DEFAULT;
     //RCLCPP_INFO(this->get_logger(), "X: %f, Y: %f",msg.x,msg.y);
     if(msg.y>11.0){
-      change_background_request(RED);//TOP Side
+      requestedColor=RED;
+      //change_background_request(RED);//TOP Side
     }
     if(msg.x>11.0){
-      change_background_request(GREEN);//Left Side
+      requestedColor=GREEN;
+      //change_background_request(GREEN);//Left Side
     }
 
-    if(msg.y==0.0){
-      change_background_request(ORANGE);//Right Side
+    if(msg.y<=0.0){
+      requestedColor=ORANGE;
+      //change_background_request(ORANGE);//Right Side
     }
-    if(msg.x==0.0){
-      change_background_request(BLUE);//Bottom Side
+    if(msg.x<=0.0){
+      requestedColor=BLUE;
+      //change_background_request(BLUE);//Bottom Side
     }
+    if(requestedColor!=DEFAULT&&requestedColor!=currentcolor){
+
+      change_background_request(requestedColor);// the if statement is just for Performance -> not having to call the parameter Service 
+      //too frequently in case the Bot is on an edge
+      RCLCPP_INFO(rclcpp::get_logger("rclcpp"), "Call to Parameter Service");
+      currentcolor=requestedColor;
+    }
+
   };
   rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr subscription_;
   

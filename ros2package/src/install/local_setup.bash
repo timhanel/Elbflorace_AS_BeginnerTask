@@ -101,7 +101,7 @@ _colcon_prefix_sh_source_script() {
     echo "not found: \"$1\"" 1>&2
   fi
 }
-
+ros2 run turtlesim turtle_teleop_key
 # get all commands in topological order
 _colcon_ordered_commands="$($_colcon_python_executable "$_colcon_prefix_bash_COLCON_CURRENT_PREFIX/_local_setup_util_sh.py" sh bash)"
 unset _colcon_python_executable
@@ -119,3 +119,5 @@ unset _colcon_ordered_commands
 unset _colcon_prefix_sh_source_script
 
 unset _colcon_prefix_bash_COLCON_CURRENT_PREFIX
+
+
